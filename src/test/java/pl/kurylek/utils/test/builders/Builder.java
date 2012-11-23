@@ -9,12 +9,29 @@ public abstract class Builder<T> {
 
     private final T buildedObject;
 
+    protected Builder(T buildedObject) {
+	this.buildedObject = buildedObject;
+    }
+    
     protected Builder() {
 	buildedObject = createBuildedObject();
     }
 
-    protected Builder(T buildedObject) {
-	this.buildedObject = buildedObject;
+    private T createBuildedObject() {
+	try {
+	    return getClassFromParameterizedType().newInstance();
+	} catch (Exception e) {
+	    throw new RuntimeException("Cannot create the builder class", e);
+	}
+    }
+
+    @SuppressWarnings("unchecked")
+    private Class<T> getClassFromParameterizedType() {
+	return (Class<T>) getParameterizedType().getActualTypeArguments()[0];
+    }
+
+    private ParameterizedType getParameterizedType() {
+	return (ParameterizedType) getClass().getGenericSuperclass();
     }
 
     public final <V> Builder<T> with(String fieldName, V fieldValue) {
@@ -34,23 +51,6 @@ public abstract class Builder<T> {
 	} finally {
 	    field.setAccessible(false);
 	}
-    }
-
-    private T createBuildedObject() {
-	try {
-	    return getClassFromParameterizedType().newInstance();
-	} catch (Exception e) {
-	    throw new RuntimeException("Cannot create the builder class", e);
-	}
-    }
-
-    @SuppressWarnings("unchecked")
-    private Class<T> getClassFromParameterizedType() {
-	return (Class<T>) getParameterizedType().getActualTypeArguments()[0];
-    }
-
-    private ParameterizedType getParameterizedType() {
-	return (ParameterizedType) getClass().getGenericSuperclass();
     }
 
     protected final T getBuildedObject() {
