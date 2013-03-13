@@ -16,6 +16,7 @@
 		<junit.version>4.10</junit.version>
 		<mockito-core.version>1.9.5</mockito-core.version>
 		<fest-assert.version>1.4</fest-assert.version>
+		<wagon-ftp.version>2.4</wagon-ftp.version>
 	</properties>
 
 	<dependencies>
@@ -50,5 +51,18 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<version>${wagon-ftp.version}</version>
+			</extension>
+		</extensions>
 	</build>
+	<distributionManagement>
+		<repository>
+			<id>kurylek-maven-repo</id>
+			<url>ftp://repo.kurylek.pl/www/maven2</url>
+		</repository>
+	</distributionManagement>
 </project>
