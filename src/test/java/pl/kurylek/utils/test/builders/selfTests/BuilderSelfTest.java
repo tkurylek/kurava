@@ -1,4 +1,4 @@
-package pl.kurylek.utils.test.builder.selfTests;
+package pl.kurylek.utils.test.builders.selfTests;
 
 import static junit.framework.Assert.fail;
 import static org.fest.assertions.Assertions.assertThat;
