@@ -1,4 +1,4 @@
-package pl.kurylek.utils.test.builders.selfTests;
+package pl.kurylek.utils.test.builders;
 
 import static junit.framework.Assert.fail;
 import static org.fest.assertions.Assertions.assertThat;
@@ -6,10 +6,10 @@ import static pl.kurylek.utils.test.mocks.hero.HeroBuilder.aHero;
 
 import org.junit.Test;
 
-import pl.kurylek.utils.test.builders.WithMethodBindingException;
+import pl.kurylek.utils.builders.WithMethodBindingException;
 import pl.kurylek.utils.test.mocks.hero.Hero;
 
-public class BuilderSelfTest {
+public class BuilderTest {
 
     private static final Object ANY_VALUE = new Object();
     private static final String NON_EXISTING_FIELD = "NonExistingField";

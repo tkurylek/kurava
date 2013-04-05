@@ -1,4 +1,4 @@
-package pl.kurylek.utils;
+package pl.kurylek.utils.nullsafe;
 
 
 public class NullSafeUtils {

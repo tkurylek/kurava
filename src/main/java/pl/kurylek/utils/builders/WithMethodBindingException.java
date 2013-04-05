@@ -1,4 +1,4 @@
-package pl.kurylek.utils.test.builders;
+package pl.kurylek.utils.builders;
 
 @SuppressWarnings("serial")
 public class WithMethodBindingException extends RuntimeException {

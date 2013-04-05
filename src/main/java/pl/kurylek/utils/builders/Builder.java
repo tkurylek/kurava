@@ -1,23 +1,23 @@
-package pl.kurylek.utils.test.builders;
+package pl.kurylek.utils.builders;
 
-import static pl.kurylek.utils.NullSafeUtils.nullSafeToString;
+import static pl.kurylek.utils.nullsafe.NullSafeUtils.nullSafeToString;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 
 public abstract class Builder<T> {
 
-    private final T buildedObject;
+    private final T builtObject;
 
-    protected Builder(T buildedObject) {
-	this.buildedObject = buildedObject;
+    protected Builder(T builtObject) {
+	this.builtObject = builtObject;
     }
-    
+
     protected Builder() {
-	buildedObject = createBuildedObject();
+	builtObject = createObjectFromParametrizedType();
     }
 
-    private T createBuildedObject() {
+    private T createObjectFromParametrizedType() {
 	try {
 	    return getClassFromParameterizedType().newInstance();
 	} catch (Exception e) {
@@ -37,27 +37,28 @@ public abstract class Builder<T> {
     public final <V> Builder<T> with(String fieldName, V fieldValue) {
 	try {
 	    setBuildedObjectField(fieldName, fieldValue);
-	} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+	} catch (Exception e) {
 	    throw new WithMethodBindingException(e, fieldName, nullSafeToString(fieldValue));
 	}
 	return this;
     }
 
-    private <V> void setBuildedObjectField(String fieldName, V fieldValue) throws NoSuchFieldException, IllegalAccessException {
-	Field field = buildedObject.getClass().getDeclaredField(fieldName);
+    private <V> void setBuildedObjectField(String fieldName, V fieldValue) throws NoSuchFieldException,
+	    IllegalAccessException {
+	Field field = builtObject.getClass().getDeclaredField(fieldName);
 	try {
 	    field.setAccessible(true);
-	    field.set(buildedObject, fieldValue);
+	    field.set(builtObject, fieldValue);
 	} finally {
 	    field.setAccessible(false);
 	}
     }
 
     protected final T getBuildedObject() {
-	return buildedObject;
+	return builtObject;
     }
 
     public final T build() {
-	return buildedObject;
+	return builtObject;
     }
 }

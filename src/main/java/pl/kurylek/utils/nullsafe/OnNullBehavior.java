@@ -1,4 +1,4 @@
-package pl.kurylek.utils;
+package pl.kurylek.utils.nullsafe;
 
 public interface OnNullBehavior<T> {
 

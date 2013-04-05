@@ -1,6 +1,6 @@
 package pl.kurylek.utils.test.mocks.hero;
 
-import pl.kurylek.utils.test.builders.Builder;
+import pl.kurylek.utils.builders.Builder;
 
 public class HeroBuilder extends Builder<Hero> {
 
