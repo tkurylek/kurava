@@ -1,4 +1,5 @@
-package pl.kurylek.utils.mappers;
+package pl.kurylek.utils.test.mocks.hero;
+
 
 public class HeroSnapshot {
 

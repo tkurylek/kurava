@@ -3,35 +3,20 @@ package pl.kurylek.utils.builders;
 import static pl.kurylek.utils.nullsafe.NullSafeUtils.nullSafeToString;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
+
+import pl.kurylek.utils.creators.InstanceCreator;
 
 public abstract class Builder<T> {
 
     private final T builtObject;
+    private final InstanceCreator instanceCreator = new InstanceCreator(getClass());
 
     protected Builder(T builtObject) {
 	this.builtObject = builtObject;
     }
 
     protected Builder() {
-	builtObject = createObjectFromParametrizedType();
-    }
-
-    private T createObjectFromParametrizedType() {
-	try {
-	    return getClassFromParameterizedType().newInstance();
-	} catch (Exception e) {
-	    throw new RuntimeException("Cannot create the builder class", e);
-	}
-    }
-
-    @SuppressWarnings("unchecked")
-    private Class<T> getClassFromParameterizedType() {
-	return (Class<T>) getParameterizedType().getActualTypeArguments()[0];
-    }
-
-    private ParameterizedType getParameterizedType() {
-	return (ParameterizedType) getClass().getGenericSuperclass();
+	builtObject = instanceCreator.createObjectFromParametrizedType();
     }
 
     public final <V> Builder<T> with(String fieldName, V fieldValue) {

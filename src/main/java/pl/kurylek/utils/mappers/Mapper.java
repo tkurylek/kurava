@@ -1,30 +1,33 @@
 package pl.kurylek.utils.mappers;
 
-import java.lang.reflect.ParameterizedType;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 public abstract class Mapper<S, T> {
 
-    public T map(S source) {
-	T target = createObjectFromParametrizedType();
-	getMappingStrategy().map(source, target);
-	return target;
-    }
-
-    private T createObjectFromParametrizedType() {
-	try {
-	    return getClassFromParameterizedType().newInstance();
-	} catch (Exception e) {
-	    throw new RuntimeException("Cannot create the builder class", e);
+    public List<T> map(Collection<S> sources) {
+	List<T> targets = new LinkedList<>();
+	for (S source : sources) {
+	    targets.add(map(source));
 	}
+	return targets;
     }
 
-    @SuppressWarnings("unchecked")
-    private Class<T> getClassFromParameterizedType() {
-	return (Class<T>) getParameterizedType().getActualTypeArguments()[1];
+    public T map(S source) {
+	return getMappingStrategy().map(source);
     }
 
-    private ParameterizedType getParameterizedType() {
-	return (ParameterizedType) getClass().getGenericSuperclass();
+    public List<S> mapReversely(Collection<T> targets) {
+	List<S> sources = new LinkedList<>();
+	for (T target : targets) {
+	    sources.add(mapReversely(target));
+	}
+	return sources;
+    }
+
+    public S mapReversely(T target) {
+	return getMappingStrategy().mapReversely(target);
     }
 
     protected abstract MappingStrategy<S, T> getMappingStrategy();

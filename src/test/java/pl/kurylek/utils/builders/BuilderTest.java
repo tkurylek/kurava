@@ -1,4 +1,4 @@
-package pl.kurylek.utils.test.builders;
+package pl.kurylek.utils.builders;
 
 import static junit.framework.Assert.fail;
 import static org.fest.assertions.Assertions.assertThat;
@@ -6,7 +6,6 @@ import static pl.kurylek.utils.test.mocks.hero.HeroBuilder.aHero;
 
 import org.junit.Test;
 
-import pl.kurylek.utils.builders.WithMethodBindingException;
 import pl.kurylek.utils.test.mocks.hero.Hero;
 
 public class BuilderTest {
