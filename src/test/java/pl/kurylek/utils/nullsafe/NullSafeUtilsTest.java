@@ -3,12 +3,12 @@ package pl.kurylek.utils.nullsafe;
 import static org.fest.assertions.Assertions.assertThat;
 import static pl.kurylek.utils.nullsafe.NullSafeUtils.nullSafe;
 import static pl.kurylek.utils.nullsafe.NullSafeUtils.nullSafeToString;
-import static pl.kurylek.utils.test.mocks.hero.HeroProfiledBuilder.aCaptainAmerica;
+import static pl.kurylek.utils.tests.stub.hero.HeroProfiledBuilder.aCaptainAmerica;
 
 import org.junit.Test;
 
 import pl.kurylek.utils.nullsafe.OnNullBehavior;
-import pl.kurylek.utils.test.mocks.hero.Hero;
+import pl.kurylek.utils.tests.stub.hero.Hero;
 
 public class NullSafeUtilsTest {
 
