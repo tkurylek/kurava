@@ -4,19 +4,19 @@ import static pl.kurylek.utils.nullsafe.NullSafeUtils.nullSafeToString;
 
 import java.lang.reflect.Field;
 
-import pl.kurylek.utils.creator.InstanceCreator;
+import pl.kurylek.utils.creator.InstanceFromGenericTypeCreator;
 
 public abstract class Builder<T> {
 
     private final T builtObject;
-    private final InstanceCreator instanceCreator = new InstanceCreator(getClass());
+    private final InstanceFromGenericTypeCreator instanceFromParametrizedTypeCreator = new InstanceFromGenericTypeCreator(getClass());
 
     protected Builder(T builtObject) {
 	this.builtObject = builtObject;
     }
 
     protected Builder() {
-	builtObject = instanceCreator.createObjectFromParametrizedType();
+	builtObject = instanceFromParametrizedTypeCreator.createObjectFromParametrizedType();
     }
 
     public final <V> Builder<T> with(String fieldName, V fieldValue) {

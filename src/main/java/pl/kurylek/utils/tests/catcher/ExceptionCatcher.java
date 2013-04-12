@@ -2,6 +2,10 @@ package pl.kurylek.utils.tests.catcher;
 
 public class ExceptionCatcher {
 
+    private ExceptionCatcher() {
+	throw new AssertionError("Using constructor of this class is prohibited.");
+    }
+
     @SuppressWarnings("unchecked")
     public static <E extends Exception> E tryToCatch(Class<E> exceptionType,
 	    ThrowableOperation throwableOperation) {
@@ -11,8 +15,7 @@ public class ExceptionCatcher {
 	    if (exceptionType.isInstance(e)) {
 		return (E) e;
 	    }
-	    throw new ExceptionCatcherException(exceptionType, e);
 	}
-	throw new ExceptionCatcherException(exceptionType);
+	throw new ExceptionCatcherAssertionError(exceptionType);
     }
 }

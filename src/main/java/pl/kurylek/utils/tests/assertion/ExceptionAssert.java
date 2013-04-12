@@ -1,10 +1,10 @@
 package pl.kurylek.utils.tests.assertion;
 
-public class ExceptionAssert {
+public final class ExceptionAssert {
 
     private final Throwable throwable;
 
-    public ExceptionAssert(Throwable throwable) {
+    ExceptionAssert(Throwable throwable) {
 	this.throwable = throwable;
     }
 
@@ -12,14 +12,14 @@ public class ExceptionAssert {
 	if (throwable == null) {
 	    return this;
 	}
-	throw new AssertionError("Expected " + throwable.getClass() + " NOT to be thrown.");
+	throw new AssertionError("Expected exception NOT to be thrown.");
     }
 
     public ExceptionAssert isThrown() {
 	if (throwable != null) {
 	    return this;
 	}
-	throw new AssertionError("Expected " + throwable.getClass() + " to be thrown.");
+	throw new AssertionError("Expected exception to be thrown.");
     }
 
     public ExceptionAssert withMessage(String exceptionMessage) {

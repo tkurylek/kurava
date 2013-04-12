@@ -2,12 +2,12 @@ package pl.kurylek.utils.creator;
 
 import java.lang.reflect.ParameterizedType;
 
-public class InstanceCreator {
+public final class InstanceFromGenericTypeCreator {
 
     private static final int DEFUALT_PARAMETER_INDEX = 0;
     private final Class<?> genericClass;
 
-    public InstanceCreator(Class<?> genericClass) {
+    public InstanceFromGenericTypeCreator(Class<?> genericClass) {
 	this.genericClass = genericClass;
     }
 

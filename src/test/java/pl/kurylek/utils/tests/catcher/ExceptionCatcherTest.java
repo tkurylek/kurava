@@ -5,9 +5,6 @@ import static pl.kurylek.utils.tests.catcher.ExceptionCatcher.tryToCatch;
 
 import org.junit.Test;
 
-import pl.kurylek.utils.tests.catcher.ExceptionCatcherException;
-import pl.kurylek.utils.tests.catcher.ThrowableOperation;
-
 public class ExceptionCatcherTest {
 
     @SuppressWarnings("serial")
@@ -21,7 +18,7 @@ public class ExceptionCatcherTest {
     @Test
     public void shouldTryToCatchAnException() {
 	// when
-	Exception caughtException = tryToCatch(ExpectedException.class, new ThrowableOperation() {
+	ExpectedException caughtException = tryToCatch(ExpectedException.class, new ThrowableOperation() {
 
 	    @Override
 	    public void operate() throws Exception {
@@ -33,14 +30,14 @@ public class ExceptionCatcherTest {
 	assertThrowable(caughtException).isThrown();
     }
 
-    private void operationThatWillThrowException() throws Exception {
+    private void operationThatWillThrowException() throws ExpectedException {
 	throw new ExpectedException();
     }
 
     @Test
     public void shouldThrowExceptionWhenNothingWasCaught() {
 	// when
-	ExceptionCatcherException caughtException = null;
+	ExceptionCatcherAssertionError caughtException = null;
 	try {
 	    tryToCatch(ExpectedException.class, new ThrowableOperation() {
 
@@ -49,7 +46,7 @@ public class ExceptionCatcherTest {
 		    operationThatWillNotThrowAnyException();
 		}
 	    });
-	} catch (ExceptionCatcherException e) {
+	} catch (ExceptionCatcherAssertionError e) {
 	    caughtException = e;
 	}
 
@@ -63,7 +60,7 @@ public class ExceptionCatcherTest {
     @Test
     public void shouldThrowExceptionWhenCaughtExceptionWasDifferentThanExpected() {
 	// when
-	ExceptionCatcherException caughtException = null;
+	ExceptionCatcherAssertionError caughtException = null;
 	try {
 	    tryToCatch(ExpectedException.class, new ThrowableOperation() {
 
@@ -72,7 +69,7 @@ public class ExceptionCatcherTest {
 		    operationThatWillThrowOtherException();
 		}
 	    });
-	} catch (ExceptionCatcherException e) {
+	} catch (ExceptionCatcherAssertionError e) {
 	    caughtException = e;
 	}
 

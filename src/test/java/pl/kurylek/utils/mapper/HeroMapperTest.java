@@ -5,36 +5,36 @@ import static pl.kurylek.utils.tests.stub.hero.HeroProfiledBuilder.aCaptainAmeri
 
 import org.junit.Test;
 
-import pl.kurylek.utils.mapper.Mapper;
-import pl.kurylek.utils.mapper.MappingStrategy;
 import pl.kurylek.utils.tests.stub.hero.Hero;
 import pl.kurylek.utils.tests.stub.hero.HeroSnapshot;
 
 public class HeroMapperTest {
 
-    private final Mapper<Hero, HeroSnapshot> heroMapper = new Mapper<Hero, HeroSnapshot>() {
+    final AbstractMapper<Hero, HeroSnapshot> heroMapper = new AbstractMapper<Hero, HeroSnapshot>() {
 
 	@Override
 	protected MappingStrategy<Hero, HeroSnapshot> getMappingStrategy() {
-	    return new MappingStrategy<Hero, HeroSnapshot>() {
+	    return heroMappingStrategy;
+	}
+    };
 
-		@Override
-		public HeroSnapshot map(Hero source) {
-		    HeroSnapshot target = new HeroSnapshot();
-		    target.setId(source.getId());
-		    target.setName(source.getFirstName() + " " + source.getLastName());
-		    return target;
-		}
+    final MappingStrategy<Hero, HeroSnapshot> heroMappingStrategy = new MappingStrategy<Hero, HeroSnapshot>() {
 
-		@Override
-		public Hero mapReversely(HeroSnapshot target) {
-		    Hero source = new Hero();
-		    source.setId(target.getId());
-		    source.setFirstName(target.getName().split(" ")[0]);
-		    source.setLastName(target.getName().split(" ")[1]);
-		    return source;
-		}
-	    };
+	@Override
+	public HeroSnapshot map(Hero source) {
+	    HeroSnapshot target = new HeroSnapshot();
+	    target.setId(source.getId());
+	    target.setName(source.getFirstName() + " " + source.getLastName());
+	    return target;
+	}
+
+	@Override
+	public Hero mapReversely(HeroSnapshot target) {
+	    Hero source = new Hero();
+	    source.setId(target.getId());
+	    source.setFirstName(target.getName().split(" ")[0]);
+	    source.setLastName(target.getName().split(" ")[1]);
+	    return source;
 	}
     };
 

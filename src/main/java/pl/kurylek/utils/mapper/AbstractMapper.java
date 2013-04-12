@@ -4,9 +4,11 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class Mapper<S, T> {
+public abstract class AbstractMapper<S, T> {
 
-    public List<T> map(Collection<S> sources) {
+    protected abstract MappingStrategy<S, T> getMappingStrategy();
+
+    public final List<T> map(Collection<S> sources) {
 	List<T> targets = new LinkedList<>();
 	for (S source : sources) {
 	    targets.add(map(source));
@@ -14,11 +16,11 @@ public abstract class Mapper<S, T> {
 	return targets;
     }
 
-    public T map(S source) {
+    public final T map(S source) {
 	return getMappingStrategy().map(source);
     }
 
-    public List<S> mapReversely(Collection<T> targets) {
+    public final List<S> mapReversely(Collection<T> targets) {
 	List<S> sources = new LinkedList<>();
 	for (T target : targets) {
 	    sources.add(mapReversely(target));
@@ -26,9 +28,7 @@ public abstract class Mapper<S, T> {
 	return sources;
     }
 
-    public S mapReversely(T target) {
+    public final S mapReversely(T target) {
 	return getMappingStrategy().mapReversely(target);
     }
-
-    protected abstract MappingStrategy<S, T> getMappingStrategy();
 }

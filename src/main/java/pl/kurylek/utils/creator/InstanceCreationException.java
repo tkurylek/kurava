@@ -1,7 +1,7 @@
 package pl.kurylek.utils.creator;
 
 @SuppressWarnings("serial")
-public class InstanceCreationException extends RuntimeException {
+class InstanceCreationException extends RuntimeException {
 
     public InstanceCreationException(String message, Throwable cause) {
 	super(message, cause);
