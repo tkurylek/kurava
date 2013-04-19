@@ -4,12 +4,12 @@ import static pl.kurylek.utils.nullsafe.NullSafeUtils.nullSafeToString;
 
 import java.lang.reflect.Field;
 
-import pl.kurylek.utils.creator.InstanceFromGenericTypeCreator;
+import pl.kurylek.utils.creator.InstanceFromParametrizedTypeCreator;
 
 public abstract class Builder<T> {
 
     private final T builtObject;
-    private final InstanceFromGenericTypeCreator instanceFromParametrizedTypeCreator = new InstanceFromGenericTypeCreator(getClass());
+    private final InstanceFromParametrizedTypeCreator instanceFromParametrizedTypeCreator = new InstanceFromParametrizedTypeCreator(getClass());
 
     protected Builder(T builtObject) {
 	this.builtObject = builtObject;

@@ -1,6 +1,6 @@
 package pl.kurylek.utils.tests.catcher;
 
-public interface ThrowableOperation {
+public interface ExceptionalOperation {
 
     void operate() throws Exception;
 }

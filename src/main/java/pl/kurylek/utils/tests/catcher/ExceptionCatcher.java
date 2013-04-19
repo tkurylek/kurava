@@ -8,7 +8,7 @@ public class ExceptionCatcher {
 
     @SuppressWarnings("unchecked")
     public static <E extends Exception> E tryToCatch(Class<E> exceptionType,
-	    ThrowableOperation throwableOperation) {
+	    ExceptionalOperation throwableOperation) {
 	try {
 	    throwableOperation.operate();
 	} catch (Exception e) {
@@ -16,6 +16,6 @@ public class ExceptionCatcher {
 		return (E) e;
 	    }
 	}
-	throw new ExceptionCatcherAssertionError(exceptionType);
+	return null;
     }
 }
